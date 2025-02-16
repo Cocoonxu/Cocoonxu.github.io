@@ -8,29 +8,26 @@
   <meta name="renderer" content="webkit">
 
   
-  <title>text1 | Oler Blog</title>
+  <title>kruskal（克鲁斯卡尔）算法原理及图解案例 | 星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。</title>
 
   <link rel="shortcut icon" href="/image/favicon.jpg">
-  <link rel="alternate" href="/atom.xml" title="Oler Blog" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。" type="application/atom+xml">
   <meta name="description" content="前置知识：并查集、图的存储参考文献：OI Wiki 什么是kruskal？kruskal是一种最小生成树算法，由Joseph Kruskal在1956年发表最小生成树（Minimum Spanning Tree，MST）简单来说就是：在一个连通图中，找出其中的一个可以使各个点之间连通且路权之和最小的连接方法，然后根据这个连接方法生成一个树它的实现过程如下： 算法原理（建议搭配下面的案例一起食用~~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="text1">
-<meta property="og:url" content="https://cocoonxu.me/2025/02/16/text1/index.html">
-<meta property="og:site_name" content="Oler Blog">
+<meta property="og:title" content="kruskal（克鲁斯卡尔）算法原理及图解案例">
+<meta property="og:url" content="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/index.html">
+<meta property="og:site_name" content="星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。">
 <meta property="og:description" content="前置知识：并查集、图的存储参考文献：OI Wiki 什么是kruskal？kruskal是一种最小生成树算法，由Joseph Kruskal在1956年发表最小生成树（Minimum Spanning Tree，MST）简单来说就是：在一个连通图中，找出其中的一个可以使各个点之间连通且路权之和最小的连接方法，然后根据这个连接方法生成一个树它的实现过程如下： 算法原理（建议搭配下面的案例一起食用~~">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/8d55a562a5cb46679bfbf3cf4ae6d98a.png#pic_center">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/60847f3e04d24932bd3b26e053969329.png#pic_center">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/4072793925e641f782ba6042681090f0.png#pic_center">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/771ea53799214556a1d81661b5783230.png#pic_center">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/91f01c445c0e4c978a147dda52c6c209.png#pic_center">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/f1b72a25f3ff49119b55d8ff36efbd7c.png#pic_center">
-<meta property="og:image" content="https://i-blog.csdnimg.cn/direct/d269622e0e814690b1d7824981a78906.png#pic_center">
+<meta property="og:image" content="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/graph.png">
+<meta property="og:image" content="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/edge.png">
+<meta property="og:image" content="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/graph(4).png">
+<meta property="og:image" content="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/graph(5).png">
 <meta property="article:published_time" content="2025-02-16T13:31:24.000Z">
-<meta property="article:modified_time" content="2025-02-16T13:34:14.780Z">
+<meta property="article:modified_time" content="2025-02-16T13:45:20.571Z">
 <meta property="article:author" content="这很励志">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i-blog.csdnimg.cn/direct/8d55a562a5cb46679bfbf3cf4ae6d98a.png#pic_center">
+<meta name="twitter:image" content="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/graph.png">
 <meta name="twitter:creator" content="@CocoonLeo">
 
   <meta name="keywords" content="">
@@ -38,16 +35,16 @@
   <meta name="theme-color" content="#9C27B0">
 
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Oler Blog">
-  <meta name="msapplication-starturl" content="https://cocoonxu.me/2025/02/16/text1/">
+  <meta name="application-name" content="星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。">
+  <meta name="msapplication-starturl" content="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Oler Blog">
+  <meta name="apple-mobile-web-app-title" content="星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <link rel="apple-touch-icon" href="/image/favicon.jpg">
 
   
-    <link rel="canonical" href="https://cocoonxu.me/2025/02/16/text1/">
+    <link rel="canonical" href="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/">
   
 
   
@@ -73,7 +70,7 @@
   <header id="header" class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide mdui-appbar-inset">
   <div class="mdui-toolbar mdui-color-theme">
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
-    <a href="/" class="mdui-typo-headline">Oler Blog</a>
+    <a href="/" class="mdui-typo-headline">星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。</a>
     <div class="mdui-toolbar-spacer"></div>
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
     <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
@@ -192,10 +189,10 @@
   <style>#main article .mdui-card-content .text-center{text-align:center!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-7.png" style="max-height: 240px;">
+      <img src="/images/random/material-19.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">text1</div>
+          <div class="mdui-card-primary-title">kruskal（克鲁斯卡尔）算法原理及图解案例</div>
           <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2025-02-16 / <i class="iconfont">&#xe601;</i> 这很励志 &nbsp;&nbsp; <span id="busuanzi_container_page_pv" style="display: none;"><i class="iconfont">&#xe7fd;</i> <span id="busuanzi_value_page_pv"></span></span></div>
         </div>
       </div>
@@ -208,7 +205,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="//qr.liantu.com/api.php?w=246&m=10&text=https://cocoonxu.me/2025/02/16/text1/">
+                <img src="//qr.liantu.com/api.php?w=246&m=10&text=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/">
               
             </li>
           </ul>
@@ -217,25 +214,25 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="https://service.weibo.com/share/share.php?appkey=&title=text1&url=https://cocoonxu.me/2025/02/16/text1/&pic=https://cocoonxu.me/image/favicon.jpg&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+              <a href="https://service.weibo.com/share/share.php?appkey=&title=kruskal（克鲁斯卡尔）算法原理及图解案例&url=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/&pic=https://cocoonxu.me/image/favicon.jpg&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=text1&url=https://cocoonxu.me/2025/02/16/text1/&via=这很励志" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=kruskal（克鲁斯卡尔）算法原理及图解案例&url=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/&via=这很励志" target="_blank" class="mdui-ripple">分享到 Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https://cocoonxu.me/2025/02/16/text1/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=https://cocoonxu.me/2025/02/16/text1/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+              <a href="https://plus.google.com/share?url=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/" target="_blank" class="mdui-ripple">分享到 Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://cocoonxu.me/2025/02/16/text1/&title=text1" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/&title=kruskal（克鲁斯卡尔）算法原理及图解案例" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://connect.qq.com/widget/shareqq/index.html?site=Oler Blog&title=text1&pics=https://cocoonxu.me/image/favicon.jpg&url=https://cocoonxu.me/2025/02/16/text1/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+              <a href="https://connect.qq.com/widget/shareqq/index.html?site=星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。&title=kruskal（克鲁斯卡尔）算法原理及图解案例&pics=https://cocoonxu.me/image/favicon.jpg&url=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/" target="_blank" class="mdui-ripple">分享到 QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=https://cocoonxu.me/2025/02/16/text1/&text=text1" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+              <a href="https://telegram.me/share/url?url=https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/&text=kruskal（克鲁斯卡尔）算法原理及图解案例" target="_blank" class="mdui-ripple">分享到 Telegram</a>
             </li>
           </ul>
         
@@ -251,13 +248,13 @@
 <p>若这两个点不连通，那么使用当前边连接这两个点一定是权值最小的，道理很简单，因为边是按照<strong>边是按照权值从大到小排序</strong>的，往后遍历的权值一定大于等于当前边，又因为你要一个最小生成树，所以每两个点之间迟早要连通，所以就赶紧趁着这个最优情况把这两个点连了，故这条边一定是最小生成树的一部分</p>
 <p>以上两种情况可以互相印证，如第一种情况其实就可以看作是<strong>先前连接方案</strong>的第二种情况</p>
 <p>所以当我们把所有边遍历完之后，最小生成树也就出来了</p>
-<h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><p>首先我们拿到一个图<br><img src="https://i-blog.csdnimg.cn/direct/8d55a562a5cb46679bfbf3cf4ae6d98a.png#pic_center" alt="图"></p>
-<p>然后将这个图的每一条边排序得到<br><img src="https://i-blog.csdnimg.cn/direct/60847f3e04d24932bd3b26e053969329.png#pic_center" alt="边"></p>
-<p>我们看第一条边，发现2和5不连通，那么我们就把它连接上<br><img src="https://i-blog.csdnimg.cn/direct/4072793925e641f782ba6042681090f0.png#pic_center" alt="step1"></p>
-<p>然后第二条边，发现3和5也不连通，那么就也把它连接上<br><img src="https://i-blog.csdnimg.cn/direct/771ea53799214556a1d81661b5783230.png#pic_center" alt="step2"></p>
-<p>然后第三条边，发现1和3也不连通，那么把它连接上<br><img src="https://i-blog.csdnimg.cn/direct/91f01c445c0e4c978a147dda52c6c209.png#pic_center" alt="step3"></p>
-<p>到第四条边的时候，发现1和5是连通的，故跳过<br>第五条边3和4不连通，故连接上<br><img src="https://i-blog.csdnimg.cn/direct/f1b72a25f3ff49119b55d8ff36efbd7c.png#pic_center" alt="step5"></p>
-<p>第六条边2和6不连通，故连接上<br><img src="https://i-blog.csdnimg.cn/direct/d269622e0e814690b1d7824981a78906.png#pic_center" alt="最小生成树"></p>
+<h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><p>首先我们拿到一个图<br><img src="/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/graph.png" alt="图"></p>
+<p>然后将这个图的每一条边排序得到<br><img src="/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/edge.png" alt="边"></p>
+<p>我们看第一条边，发现2和5不连通，那么我们就把它连接上<br>![step1](&#x2F;kruskal（克鲁斯卡尔）算法原理及图解案例&#x2F;graph (1).png)</p>
+<p>然后第二条边，发现3和5也不连通，那么就也把它连接上<br>![step2](&#x2F;kruskal（克鲁斯卡尔）算法原理及图解案例&#x2F;graph (2).png)</p>
+<p>然后第三条边，发现1和3也不连通，那么把它连接上<br>![step3](&#x2F;kruskal（克鲁斯卡尔）算法原理及图解案例&#x2F;graph (3).png)</p>
+<p>到第四条边的时候，发现1和5是连通的，故跳过<br>第五条边3和4不连通，故连接上<br><img src="/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/graph(4).png" alt="step5"></p>
+<p>第六条边2和6不连通，故连接上<br><img src="/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/graph(5).png" alt="最小生成树"></p>
 <p>第七条边1和6连通，故跳过<br>非常简单是不是？（我刚开始的时候不这么觉得<br>然后我们就得到了一个最小生成树<br>附上一个<strong>输出最小生成树的权值和</strong>的C++代码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">#define ll long long </span><br><span class="line">#define maxn 101</span><br><span class="line">#define maxm 1000001</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">ll n,m,ans;</span><br><span class="line">ll fa[maxn],h[maxn]; //并查集需要用到的两个数组，分别是祖先和家族高度</span><br><span class="line">struct node //使用结构体方便排序与存储</span><br><span class="line">&#123;</span><br><span class="line">	ll u,v,w;</span><br><span class="line">&#125;e[maxm];</span><br><span class="line"></span><br><span class="line">ll find(ll r) //找祖宗并更新</span><br><span class="line">&#123;</span><br><span class="line">	if(r==fa[r]) return r;</span><br><span class="line">	else return fa[r]=find(fa[r]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void merge(ll x,ll y)  //合并集合</span><br><span class="line">&#123;</span><br><span class="line">	ll fx=find(x);</span><br><span class="line">	ll fy=find(y);</span><br><span class="line">	if(h[fx]&gt;h[fy]) fa[fy]=fa[fx];</span><br><span class="line">	else if(h[fx]&lt;h[fy]) fa[fx]=fa[fy];</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		fa[fy]=fa[fx];</span><br><span class="line">		h[fx]++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void kruskal() </span><br><span class="line">&#123;</span><br><span class="line">	int cnt=0;//选取边的数量，因为最小生成树的边数一定是n-1（要保证连通），所以可以做一个小剪枝</span><br><span class="line">	for(int i=1;i&lt;=n;i++) fa[i]=i; //初始的时候都是独立的集合</span><br><span class="line">	for(ll i=1;i&lt;=m&amp;&amp;cnt&lt;=n-1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		ll u=e[i].u,v=e[i].v;</span><br><span class="line">		ll fu=find(u);</span><br><span class="line">		ll fv=find(v);</span><br><span class="line">		if(fu==fv) continue ; //若在一个集合，跳过</span><br><span class="line">		cnt++; //加入最小生成树</span><br><span class="line">		ans+=e[i].w;</span><br><span class="line">		merge(u,v); //连接两个点</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool cmp(node a,node b)</span><br><span class="line">&#123;</span><br><span class="line">	return a.w&lt;b.w;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	for(ll i=1;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;e[i].u&gt;&gt;e[i].v&gt;&gt;e[i].w;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(e+1,e+1+m,cmp);</span><br><span class="line">	kruskal();</span><br><span class="line">	cout&lt;&lt;ans;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
 <p>有问题欢迎指出呀！~<br>共同进步AwA!</p>
@@ -265,7 +262,7 @@
       
       <blockquote>
         
-        <strong>本文链接：</strong><br><a href="https://cocoonxu.me/2025/02/16/text1/">https://cocoonxu.me/2025/02/16/text1/</a>
+        <strong>本文链接：</strong><br><a href="https://cocoonxu.me/2025/02/16/kruskal%EF%BC%88%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%EF%BC%89%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8A%E5%9B%BE%E8%A7%A3%E6%A1%88%E4%BE%8B/">https://cocoonxu.me/2025/02/16/kruskal（克鲁斯卡尔）算法原理及图解案例/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
