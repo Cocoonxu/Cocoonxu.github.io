@@ -12,16 +12,16 @@
 
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。" type="application/atom+xml">
-  <meta name="description" content="原题链接: 原题面 问题陈述你得到一个长度为 N 的字符串 S ，由 0 和 1 组成。保证 S 至少包含一个 1 。您可以执行以下操作任意次数（可能为零）：· 选择一个整数 i （ 1≤i≤N−1 ）并交换 S 的第 i 个和第 (i+1) 个字符。找出使所有 1 连续所需的最小操作数。这里，所有的 1 被称为是连续的，当且仅当存在整数 l 和 r （ 1≤l≤r≤N ），使得 S 的第 l~r">
+  <meta name="description" content="原题链接: 原题面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(题解)[AtCoder Beginner Contest 393] D - Swap to Gather">
 <meta property="og:url" content="https://cocoonxu.me/2025/02/19/[%E9%A2%98%E8%A7%A3][AtCoder%20Beginner%20Contest%20393]%20D%20-%20Swap%20to%20Gather/index.html">
 <meta property="og:site_name" content="星光点点，亦可照亮长夜；长夜漫漫，亦有星光熠熠。">
-<meta property="og:description" content="原题链接: 原题面 问题陈述你得到一个长度为 N 的字符串 S ，由 0 和 1 组成。保证 S 至少包含一个 1 。您可以执行以下操作任意次数（可能为零）：· 选择一个整数 i （ 1≤i≤N−1 ）并交换 S 的第 i 个和第 (i+1) 个字符。找出使所有 1 连续所需的最小操作数。这里，所有的 1 被称为是连续的，当且仅当存在整数 l 和 r （ 1≤l≤r≤N ），使得 S 的第 l~r">
+<meta property="og:description" content="原题链接: 原题面">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cocoonxu.me/2025/02/19/[%E9%A2%98%E8%A7%A3][AtCoder%20Beginner%20Contest%20393]%20D%20-%20Swap%20to%20Gather/1.png">
 <meta property="article:published_time" content="2025-02-19T13:06:43.000Z">
-<meta property="article:modified_time" content="2025-02-19T13:24:40.183Z">
+<meta property="article:modified_time" content="2025-02-19T13:25:54.003Z">
 <meta property="article:author" content="这很励志">
 <meta property="article:tag" content="题解">
 <meta name="twitter:card" content="summary">
@@ -125,7 +125,7 @@
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
-        <a class="mdui-ripple sidebar_archives-link" href="/categories/OI/">OI<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/%E9%97%B2%E8%B0%88/">闲谈<span class="mdui-ripple sidebar_archives-count">2</span></a>
+        <a class="mdui-ripple sidebar_archives-link" href="/categories/OI/">OI<span class="mdui-ripple sidebar_archives-count">2</span></a><a class="mdui-ripple sidebar_archives-link" href="/categories/%E9%97%B2%E8%B0%88/">闲谈<span class="mdui-ripple sidebar_archives-count">2</span></a>
         
       </div>
     </div>
@@ -182,7 +182,7 @@
   <style>#main article .mdui-card-content .text-center{text-align:center!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-5.png" style="max-height: 240px;">
+      <img src="/images/random/material-2.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">(题解)[AtCoder Beginner Contest 393] D - Swap to Gather</div>
@@ -233,6 +233,7 @@
     </header>
     <div class="mdui-card-content mdui-typo">
       <p>原题链接: <a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc393/tasks/abc393_d">原题面</a></p>
+<span id="more"></span>
 <h3 id="问题陈述"><a href="#问题陈述" class="headerlink" title="问题陈述"></a>问题陈述</h3><p>你得到一个长度为 N 的字符串 S ，由 0 和 1 组成。保证 S 至少包含一个 1 。<br>您可以执行以下操作任意次数（可能为零）：<br><strong>· 选择一个整数 i （ 1≤i≤N−1 ）并交换 S 的第 i 个和第 (i+1) 个字符。</strong><br>找出使所有 1 连续所需的最小操作数。<br>这里，所有的 1 被称为是连续的，当且仅当存在整数 l 和 r （ 1≤l≤r≤N ），使得 S 的第 l~r之间都是1</p>
 <h3 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h3><p>2≤N≤5×10^5<br>N 是整数。S 是一个长度为<br>N 的字符串，由 0 和 1 组成。<br>S 至少包含一个 1 。</p>
 <h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>我们来解读一下题意，题目说要把所有的1放在一起，且只能通过交换相邻两个数的方式移动<br>那么我们假设有一个1要从 i 的位置移动到 j ，毫无疑问，移动次数是 j - i (j ≥ i)，也就是<strong>i 和 j 之间的距离</strong><br>此时一切都变得熟悉，距离，最短移动次数，连续，还记得七年级上册学的，求 |x+1|+|x+2| 这个不等式为最小值时，x的值是多少吗？没错，这道题就是它<strong>几何</strong>解法的变种（虽然我在第一次想的时候也没想出来哈哈哈）<br>事实上，这是一个经典的<strong>仓库选址问题</strong>，其最小值的x一定是在中间的(不懂请看：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52797843/article/details/122069259">货仓选址</a>)<br>但唯一有一点不一样的是，求那个不等式时算的是所有点到x这个点的距离，但本题要求的是所有的1都连续，那么怎么表示这个答案呢？<br>我们假设<strong>x的值是中间的那个1的位置</strong>，那么x左边的第一个1(假设位置为k)需要移动的距离就是x-k-1（只需要移动到相邻的那个位置），x左边第二个1(假设位置为q)需要移动的距离就是x-q-2，见图</p>
@@ -251,6 +252,8 @@
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
+      
+        <a class="mdui-ripple article_categories-link" href="/categories/OI/">OI</a>
       
       
         <a class="mdui-ripple article_tags-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a>
